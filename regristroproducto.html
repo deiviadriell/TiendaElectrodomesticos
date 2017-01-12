@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="WS/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script> 
+      <script type="text/javascript" src="Scripts/Transacciones/inserciones.js"></script>
+    <script type="text/javascript" src="Scripts/Administracion/consultas.js"></script>
+    <script type="text/javascript" src="Scripts/Modal/ventanas.js"></script>
+    <script type="text/javascript" src="Scripts/Administracion/session.js"></script>
+    <title>Tienda de Electrodomesticos DOBESOC S.A.</title>
+
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <style>
+        .errores
+{
+	-webkit-box-shadpw: 0 0 10px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	-o-box-shadow:0 0 10px rgba(0,0,0,0.3);
+	background: red;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	color: #fff;
+	display: none;
+	font-size: 14px;
+	margin-top: -80px;
+	margin-left: 340px;
+	padding: 10px;
+	position:absolute;
+
+
+}
+
+
+
+    </style>
+    
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	 
+        <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+        <script src="js/fileinput.min.js" type="text/javascript"></script>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Panel de Administración</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li id="usuario" class="dropdown">
+                    
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+						<li>
+							<a href="javascript:;" data-toggle="collapse" data-target="#opproductos"><i class=""></i>  Productos <i class="fa fa-fw fa-caret-down"></i></a>
+							<ul id="opproductos" class="collapse">
+								<li>
+									<a href="regristroproducto.html">Registrar</a>
+								</li>
+								<li>
+									<a href="#">Mantenimiento</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li>
+							<a href="mantenimientocategoria.html" data-toggle="collapse" data-target="#opcategorias"><i class=""></i> Categorias </a>							
+						</li>
+						
+						<li>
+							<a href="mantenimientomarca.html" data-toggle="collapse" data-target="#opMarcas"><i class=""></i> Marcas </a>
+							
+						</li>
+						
+                    
+                    
+					
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Registro de Productos
+                            
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="index.html">Inicio</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-file"></i> Registro de producto
+                            </li>
+                        </ol>
+						
+						<div class="row">
+						<div class="col-lg-12">
+							<form class="form-horizontal"  >
+								<div class="form-group">
+									<label class="control-label col-xs-3">Nombre:</label>
+										<div class="col-xs-9">
+											<input type="text" class="form-control" name="txtNombre" id="txtNombre" placeholder="Ingrese el nombre del producto" onkeyup="validacion('txtNombre');"required>                                           
+                                           <span class="help-block"></span>
+										</div>									
+								</div>
+								
+								 <div class="form-group">
+									<label class="control-label col-xs-3">Descripción:</label>
+										<div class="col-xs-9">
+											<textarea rows="3" class="form-control"  name="txtDescripcion" id="txtDescripcion" placeholder="Ingrese una breve descripcioón del producto" onkeyup="validacion('txtDescripcion');" required></textarea>
+                                            <span class="help-block"></span>
+										</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-xs-3">Stock:</label>
+										<div class="col-xs-2">
+											<input type="number" min="1" value="1" name="txtStock" class="form-control" id="txtStock" required>
+										</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-xs-3">Categoria:</label>
+										<div class="col-xs-3">
+											<select class="form-control" name="opCategoria" id="opcionesCategoria">												
+												
+											</select>
+										</div>
+										
+										<div class="col-xs-3">
+
+                                             
+											<button type="button" class="btn btn-default" id="button" data-toggle="modal" data-target="#modalCategorias">
+												<span class="glyphicon glyphicon-plus"></span> 
+											</button>
+										</div>
+        
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-xs-3">Marcas:</label>
+										<div class="col-xs-3">
+											<select class="form-control" name="opMarcas" id="opcionesMarca">
+																						
+											</select>
+										</div>
+										
+										<div class="col-xs-3">
+											<button type="button" class="btn btn-default" id="button1" data-toggle="modal" data-target="#modalMarcas">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</div>
+        
+								</div>
+								<div class="form-group">
+									<label class="control-label col-xs-3">Precio:</label>
+									<div class="col-xs-3">
+										<input type="text" id="txtPrecio" name="txtPrecio" class="form-control" placeholder="12.50" onkeyup="validacion('txtPrecio');" required>
+                                          <span class="help-block"></span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-xs-3">Módelo:</label>
+									<div class="col-xs-3">
+										<input type="text" id="txtModelo" name="txtModelo" class="form-control" placeholder="Ingrese el módelo del producto" onkeyup="validacion('txtModelo');" required>
+                                          <span class="help-block"></span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-xs-3">Imagen:</label>
+									<div class="col-xs-9">
+										<input id="fileUpload" type="file" class="file"  data-preview-file-type="any">	
+                                        <span class="help-block"></span>									
+									</div>
+									
+								</div>
+								<br>
+								<div class="form-group">
+									<div class="col-xs-offset-3 col-xs-9">
+										<input type="button" onclick="verificar();" id="btnRegistrarProducto" class="btn btn-primary" value="Registrar">
+										<input type="reset" id="btnLimpiar"  class="btn btn-default" value="Limpiar">
+									</div>
+								</div>
+							</form>
+								</div>						
+						
+						</div>
+					</div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+
+    <div class="modal fade" id="modalCategorias" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Agregar Nueva Categoria</h4>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group">
+		<label for="ejemplo_password_1">Descripción</label>
+		<input type="text" value="" class="form-control" required id="txtDescripcionCategoria" >
+          <span class="help-block"></span>
+	</div>	
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" id="btnRegistrarCategoria" class="btn btn-primary">Agregar
+
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+     <div class="modal fade" id="modalMarcas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="H1">Agregar Nueva Marca</h4>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group">
+		<label for="ejemplo_password_1">Descripción</label>
+		<input type="text"  class="form-control" id="txtDescripcionMarca" required >
+          <span class="help-block"></span>									
+	</div>	
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button  type="button" id="btnRegistrarMarca" class="btn btn-primary">Agregar
+
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+    <script type="text/javascript">
+        var v=true;
+        $("span.help-block").hide();
+
+        function verificar(){
+
+            var v1=0,v2=0,v3=0,v4=0,v5=0,v6=0;
+            v1 = validacion('txtNombre');
+            v2 = validacion('txtDescripcion');
+            v3 = validacion('txtPrecio');
+            v4 = validacion('txtModelo');
+            v5 = validacion('fileUpload');
+            v6 = validacion('txtDescripcionCategoria');
+            v7 = validacion('txtDescripcionMarca');
+            if (v1 === false || v2 === false || v3 === false || v4 === false || v5 === false || v6 === false || v7 === false) {
+                $("#exito").hide();
+                $("#error").show();
+            }else{
+                $("#error").hide();
+                $("#exito").show();
+            }
+            /*total=v1+v2+v3+v4+v5+v6;
+            if (v && total>=6) {
+                $("#error").hide();
+                $("#exito").show();
+            }else{
+                 $("#exito").hide();
+                 $("#error").show();
+            }
+            
+            
+            validacion('nombres');
+            validacion('dni');
+            validacion('email');
+            validacion('genderRadios');
+            validacion('carrera');
+            if (v) {
+                alert("los campos estan validados")
+            }
+            else{
+                alert("los campos no estan validados");
+            }*/
+
+        }
+        function validacion(campo)
+        {
+            var a = 0;
+            if (campo === 'txtNombre') {
+                apellido = document.getElementById(campo).value;
+                if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+                    
+                    $("#glypcn"+campo).remove();
+                    $('#'+campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                    $('#'+campo).parent().children('span').text("Ingrese algo").show();
+                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                    return false;
+                    
+                }
+                else{
+                    $("#glypcn"+campo).remove();
+                    $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                    $('#'+campo).parent().children('span').hide();
+                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+                    return true;
+                    
+                } 
+            }
+            if (campo === 'txtDescripcion') {
+                descripcion = document.getElementById(campo).value;
+                if (descripcion == null || descripcion.length == 0 || /^\s+$/.test(descripcion)) {
+
+                    $("#glypcn" + campo).remove();
+                    $('#' + campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                    $('#' + campo).parent().children('span').text("Ingrese algo").show();
+                    $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                    return false;
+
+                }
+                else {
+                    $("#glypcn" + campo).remove();
+                    $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                    $('#' + campo).parent().children('span').hide();
+                    $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+                    return true;
+
+                }
+            }
+
+            if (campo === 'txtPrecio') {
+                codigo = document.getElementById(campo).value;
+                if (codigo == null || codigo.length == 0 || /^\s+$/.test(codigo)) {
+                    $("#glypcn" + campo).remove();
+                    $('#' + campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                    $('#' + campo).parent().children('span').text("Ingrese algo").show();
+                    $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                    return false;
+
+                }
+                else {
+                    if (isNaN(codigo)) {
+
+                        $("#glypcn" + campo).remove();
+                        $('#' + campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                        $('#' + campo).parent().children('span').text("No Acepta letras").show();
+                        $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+
+
+                        return false;
+                    }
+                    else {
+
+                        $("#glypcn" + campo).remove();
+                        $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                        $('#' + campo).parent().children('span').hide();
+                        $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+
+                        return true;
+                    }
+                }    
+            }
+            if (campo === 'txtModelo') {
+                apellido = document.getElementById(campo).value;
+                if (apellido == null || apellido.length == 0 || /^\s+$/.test(apellido)) {
+
+                    $("#glypcn" + campo).remove();
+                    $('#' + campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                    $('#' + campo).parent().children('span').text("Ingrese algo").show();
+                    $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                    return false;
+
+                }
+                else {
+                    $("#glypcn" + campo).remove();
+                    $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                    $('#' + campo).parent().children('span').hide();
+                    $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+                    return true;
+                }
+            }
+            
+            
+
+            if (campo === 'fileUpload') {
+                apellido = document.getElementById(campo).value;
+                if (apellido == null || apellido.length == 0 || /^\s+$/.test(apellido)) {
+
+                    alert("Seleccione una imagen para el producto");
+                    return false;
+
+                }
+                else {                    
+                    return true;
+
+                }
+            }
+
+            
+
+
+
+         
+        }
+           
+           </script>
+
+</html>

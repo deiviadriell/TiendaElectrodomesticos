@@ -1,0 +1,99 @@
+System.Web.Services.Asmx Information: 0 : Llamando a IHttpHandlerFactory.GetHandler
+    Llamador: System.Web.Services.Protocols.WebServiceHandlerFactory#10941773::GetHandler()
+    Dirección del host de la solicitud: ::1
+    Dirección URL de la solicitud: [GET] http://localhost:50491/WS/WSPeticiones.asmx/registrocategoria
+    ProcessId=3160
+    LogicalOperationStack=
+    ThreadId=8
+    DateTime=2016-08-07T13:40:30.1931540Z
+    Timestamp=242888401516
+System.Web.Services.Asmx Error: 0 : Excepción producida en System.Web.Services.Protocols.WebServiceHandlerFactory#10941773::CoreGetHandler().
+    System.InvalidOperationException: Formato de solicitud no reconocido para la dirección URL, finaliza de manera inesperada en '/registrocategoria'.
+    ProcessId=3160
+    LogicalOperationStack=
+    ThreadId=8
+    DateTime=2016-08-07T13:40:30.2191555Z
+    Timestamp=242888443434
+System.Web.Services.Asmx Information: 0 : Llamando a IHttpHandlerFactory.GetHandler
+    Llamador: System.Web.Services.Protocols.WebServiceHandlerFactory#18961937::GetHandler()
+    Dirección del host de la solicitud: ::1
+    Dirección URL de la solicitud: [GET] http://localhost:50491/WS/WSPeticiones.asmx/registrocategoria
+    ProcessId=3160
+    LogicalOperationStack=
+    ThreadId=10
+    DateTime=2016-08-07T13:41:22.6511544Z
+    Timestamp=242973771547
+System.Web.Services.Asmx Error: 0 : Excepción producida en System.Web.Services.Protocols.WebServiceHandlerFactory#18961937::CoreGetHandler().
+    System.InvalidOperationException: Formato de solicitud no reconocido para la dirección URL, finaliza de manera inesperada en '/registrocategoria'.
+    ProcessId=3160
+    LogicalOperationStack=
+    ThreadId=10
+    DateTime=2016-08-07T13:41:22.6661553Z
+    Timestamp=242973797330
+System.Web.Services.Asmx Information: 0 : Llamando a IHttpHandlerFactory.GetHandler
+    Llamador: System.Web.Services.Protocols.WebServiceHandlerFactory#20507493::GetHandler()
+    Dirección del host de la solicitud: ::1
+    Dirección URL de la solicitud: [POST] http://localhost:50491/WS/WSPeticiones.asmx/registrocategoria
+    Origen de referencia de HTTP: http://localhost:50491/regristroproducto.html
+    ProcessId=5488
+    LogicalOperationStack=
+    ThreadId=17
+    DateTime=2016-08-07T14:25:02.2069844Z
+    Timestamp=247236887596
+System.Web.Services.Asmx Information: 0 : Llamando a XmlSerializer [crear XmlSerializer]
+    Método: System.Xml.Serialization.XmlSerializer#1511227::FromMappings(System.Xml.Serialization.XmlMapping[]#43210758=[17], System.Security.Policy.Evidence#268751=..)
+    Llamador: System.Web.Services.Protocols.XmlReturn#19618831::GetInitializers(System.Web.Services.Protocols.LogicalMethodInfo#22888519=System.String HelloWorld(), System.Web.Services.Protocols.LogicalMethodInfo#60249152=Void registrocategoria(System.String), System.Web.Services.Protocols.LogicalMethodInfo#36111947=Void agregarCategoria(System.String), System.Web.Services.Protocols.LogicalMethodInfo#18926465=Int32 agregarMarca(), System.Web.Services.Protocols.LogicalMethodInfo#39454724=Int32 agregarProducto(System.String, System.String, Int32, Int32, Int32, System.Decimal), System.Web.Services.Protocols.LogicalMethodInfo#61622587=Int32 agregarPrecio(System.String, System.Decimal), System.Web.Services.Protocols.LogicalMethodInfo#2155033=Int32 agregarImagen(System.String, System.String), System.Web.Services.Protocols.LogicalMethodInfo#23099734=Int32 actualizarCategoria(Int32, System.String, System.String), System.Web.Services.Protocols.LogicalMethodInfo#8559027=Int32 actualizarImagen(Int32, System.String, System.String, Int32, System.String), System.Web.Services.Protocols.LogicalMethodInfo#20829241=Int32 actualizarMarca(Int32, System.String, System.String), System.Web.Services.Protocols.LogicalMethodInfo#44139642=Int32 actualizarPrecio(System.String, System.Decimal, Int32), System.Web.Services.Protocols.LogicalMethodInfo#968397=Int32 actualizarProducto(Int32, System.String, System.String, Int32, Int32, Int32), System.Web.Services.Protocols.LogicalMethodInfo#3584148=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.categoria] obtenerCategorias(), System.Web.Services.Protocols.LogicalMethodInfo#60316281=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.marca] obtenerMarcas(), System.Web.Services.Protocols.LogicalMethodInfo#41012396=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.producto] obtenerProductos(), System.Web.Services.Protocols.LogicalMethodInfo#41114918=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.producto] obtenerProductosCategoria(Int32), System.Web.Services.Protocols.LogicalMethodInfo#48599016=Proyecto_Integrador_Elect.Clases.producto obtenerDetalleProducto(Int32), System.Web.Services.Protocols.LogicalMethodInfo#58067259=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.producto] obtenerProductosPopulares(), System.Web.Services.Protocols.LogicalMethodInfo#11051504=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.producto] obtenerImagenes(Int32))
+    ProcessId=5488
+    LogicalOperationStack=
+    ThreadId=17
+    DateTime=2016-08-07T14:25:02.3049900Z
+    Timestamp=247237046550
+System.Web.Services.Asmx Information: 0 : Valor devuelto de XmlSerializer [crear XmlSerializer]
+    Llamador: System.Web.Services.Protocols.XmlReturn#19618831::GetInitializers(System.Web.Services.Protocols.LogicalMethodInfo#22888519=System.String HelloWorld(), System.Web.Services.Protocols.LogicalMethodInfo#60249152=Void registrocategoria(System.String), System.Web.Services.Protocols.LogicalMethodInfo#36111947=Void agregarCategoria(System.String), System.Web.Services.Protocols.LogicalMethodInfo#18926465=Int32 agregarMarca(), System.Web.Services.Protocols.LogicalMethodInfo#39454724=Int32 agregarProducto(System.String, System.String, Int32, Int32, Int32, System.Decimal), System.Web.Services.Protocols.LogicalMethodInfo#61622587=Int32 agregarPrecio(System.String, System.Decimal), System.Web.Services.Protocols.LogicalMethodInfo#2155033=Int32 agregarImagen(System.String, System.String), System.Web.Services.Protocols.LogicalMethodInfo#23099734=Int32 actualizarCategoria(Int32, System.String, System.String), System.Web.Services.Protocols.LogicalMethodInfo#8559027=Int32 actualizarImagen(Int32, System.String, System.String, Int32, System.String), System.Web.Services.Protocols.LogicalMethodInfo#20829241=Int32 actualizarMarca(Int32, System.String, System.String), System.Web.Services.Protocols.LogicalMethodInfo#44139642=Int32 actualizarPrecio(System.String, System.Decimal, Int32), System.Web.Services.Protocols.LogicalMethodInfo#968397=Int32 actualizarProducto(Int32, System.String, System.String, Int32, Int32, Int32), System.Web.Services.Protocols.LogicalMethodInfo#3584148=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.categoria] obtenerCategorias(), System.Web.Services.Protocols.LogicalMethodInfo#60316281=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.marca] obtenerMarcas(), System.Web.Services.Protocols.LogicalMethodInfo#41012396=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.producto] obtenerProductos(), System.Web.Services.Protocols.LogicalMethodInfo#41114918=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.producto] obtenerProductosCategoria(Int32), System.Web.Services.Protocols.LogicalMethodInfo#48599016=Proyecto_Integrador_Elect.Clases.producto obtenerDetalleProducto(Int32), System.Web.Services.Protocols.LogicalMethodInfo#58067259=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.producto] obtenerProductosPopulares(), System.Web.Services.Protocols.LogicalMethodInfo#11051504=System.Collections.Generic.List`1[Proyecto_Integrador_Elect.Clases.producto] obtenerImagenes(Int32))
+    ProcessId=5488
+    LogicalOperationStack=
+    ThreadId=17
+    DateTime=2016-08-07T14:25:03.3350490Z
+    Timestamp=247238723184
+System.Web.Services.Asmx Information: 0 : Valor devuelto de IHttpHandlerFactory.GetHandler
+    Llamador: System.Web.Services.Protocols.WebServiceHandlerFactory#20507493::GetHandler()
+    ProcessId=5488
+    LogicalOperationStack=
+    ThreadId=17
+    DateTime=2016-08-07T14:25:03.3440495Z
+    Timestamp=247238738547
+System.Web.Services.Asmx Information: 0 : Llamando a IHttpHandler.ProcessRequest
+    Llamador: System.Web.Services.Protocols.SyncSessionlessHandler#16538852::ProcessRequest()
+    Dirección del host de la solicitud: ::1
+    Dirección URL de la solicitud: [POST] http://localhost:50491/WS/WSPeticiones.asmx/registrocategoria
+    Origen de referencia de HTTP: http://localhost:50491/regristroproducto.html
+    ProcessId=5488
+    LogicalOperationStack=
+    ThreadId=17
+    DateTime=2016-08-07T14:25:03.5070588Z
+    Timestamp=247239003830
+System.Web.Services.Asmx Error: 0 : Excepción detectada en System.Web.Services.Protocols.SyncSessionlessHandler#16538852::CoreProcessRequest.
+    System.InvalidOperationException: Falta el parámetro: descripcion.
+    ProcessId=5488
+    LogicalOperationStack=
+    ThreadId=17
+    DateTime=2016-08-07T14:25:03.5830631Z
+    Timestamp=247239126483
+System.Web.Services.Asmx Error: 0 : Detalles de la excepción:
+System.InvalidOperationException: Falta el parámetro: descripcion.
+   en System.Web.Services.Protocols.ValueCollectionParameterReader.Read(NameValueCollection collection)
+   en System.Web.Services.Protocols.HtmlFormParameterReader.Read(HttpRequest request)
+   en System.Web.Services.Protocols.HttpServerProtocol.ReadParameters()
+   en System.Web.Services.Protocols.WebServiceHandler.CoreProcessRequest()
+    ProcessId=5488
+    LogicalOperationStack=
+    ThreadId=17
+    DateTime=2016-08-07T14:25:03.6160650Z
+    Timestamp=247239180114
+System.Web.Services.Asmx Information: 0 : Valor devuelto de IHttpHandler.ProcessRequest
+    Llamador: System.Web.Services.Protocols.SyncSessionlessHandler#16538852::ProcessRequest()
+    ProcessId=5488
+    LogicalOperationStack=
+    ThreadId=17
+    DateTime=2016-08-07T14:25:03.6270657Z
+    Timestamp=247239199171

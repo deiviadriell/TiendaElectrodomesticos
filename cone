@@ -1,0 +1,390 @@
+﻿using System;
+using System.Configuration;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Data.Sql;
+using System.Data;
+
+namespace Proyecto_Integrador_Elect
+{
+    class conexion
+    {
+        //Transacciones 
+        private SqlConnection sqlConexion;
+        private SqlCommand sqlComando;
+        private SqlDataReader sDr;
+        //autenticacion window
+        private string nombreServidor;
+        private string nombreBaseDatos;
+        private string estado;
+        //Autenticacion SQL
+        private string usuario;
+        private string clave;
+
+        private List<string> listaRetorno = new List<string>();
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase Conexion asigando la cadena de conexión
+        /// </summary>
+        /// <param name="cadenaConexion">string que representa la cadena de conexión</param>
+        public conexion(string cadenaConexion)
+        {
+            try
+            {
+                sqlConexion = new SqlConnection(cadenaConexion);
+                sqlConexion.Open();
+                estado = "Conectado";
+                sqlConexion.Close();
+            }
+            catch (Exception ex)
+            {
+                estado = ex.Message;
+                sqlConexion.Close();
+
+            }
+
+        }
+        //Autenticacion de window
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase Conexion en modo autenticación de Window con el Nombre del Servidor y la Base de datos
+        /// </summary>
+        /// <param name="nombreServidor">string Nombre del servidor SQL</param>
+        /// <param name="NombreBaseDatos">string Nombre de la base de datos</param>
+        public conexion(string nombreServidor, string nombreBaseDatos)
+        {
+            this.nombreServidor = nombreServidor;
+            this.nombreBaseDatos = nombreBaseDatos;
+            usuario = "";
+            clave = "";
+            ProbarConexion();
+        }
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase Conexion usando autenticación SQL con el Nombre del Servidor, Nombre de la base de datos, Usuario SQL, Contraseña SQL
+        /// </summary>
+        /// <param name="nombreServidor">string Nombre del servidor SQL</param>
+        /// <param name="nombreBaseDatos">string Nombre de la base de datos</param>
+        /// <param name="usuario">string Nombre de usuario SQL</param>
+        /// <param name="clave">string Clave del usuario SQL</param>
+        public conexion(string nombreServidor, string nombreBaseDatos, string usuario, string clave)
+        {
+            this.nombreServidor = nombreServidor;
+            this.nombreBaseDatos = nombreBaseDatos;
+            this.usuario = usuario;
+            this.clave = clave;
+            ProbarConexion();
+        }
+
+        /// <summary>
+        ///  Inicializa una nueva instancia de la clase Conexion tomando los parámetros del archivo de configuración, agregue al archivo de configuracion los parámetros Servidor, BaseDatos, usuario (opcional), clave(opcional)
+        /// </summary>
+        public conexion()
+        {
+            try
+            {
+                this.nombreServidor = ConfigurationManager.AppSettings["Servidor"].ToString();
+                this.nombreBaseDatos = ConfigurationManager.AppSettings["BaseDatos"].ToString();
+                this.usuario = ConfigurationManager.AppSettings["usuario"].ToString();
+                this.clave = ConfigurationManager.AppSettings["clave"].ToString();
+                ProbarConexion();
+
+            }
+            catch (SqlException ex)
+            {
+                estado = ex.Message;
+            }
+
+        }
+        private void ProbarConexion()
+        {
+            try
+            {
+                //Es Autenticación SQL
+                if (usuario != "")
+                {
+                    sqlConexion = new SqlConnection("Data Source=" + nombreServidor + ";Initial Catalog=" + nombreBaseDatos + ";User ID=" + usuario + ";password=" + clave + ";MultipleActiveResultSets=True");
+                    sqlConexion.Open();
+                    estado = "Conectado";
+                    sqlConexion.Close();
+                }
+                //Autenticación Windows
+                else
+                {
+                    sqlConexion = new SqlConnection("Data Source=" + nombreServidor + ";Initial Catalog=" + nombreBaseDatos + ";Integrated Security=True;MultipleActiveResultSets=True");
+                    sqlConexion.Open();
+                    estado = "Conectado";
+                    sqlConexion.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                estado = "Desconectado: " + ex.Message;
+            }
+        }
+        //Instancias Instaladas
+        public List<string> obtenerServidores()
+        {
+            SqlDataSourceEnumerator instancias = SqlDataSourceEnumerator.Instance;
+            DataTable unaTabla = instancias.GetDataSources();
+            for (int i = 0; i < unaTabla.Rows.Count; i++)
+            {
+                listaRetorno.Add((unaTabla.Rows[0][i]).ToString());
+            }
+            return listaRetorno;
+
+        }
+        /// <summary>
+        /// Ejecuta una Sentencia SQL en la conexión y devuelve el número de filas afectadas
+        /// </summary>
+        /// <param name="sqlSentencia">string Representa la Instrucción SQL a ejecutar</param>
+        /// <returns>Filas Afectadas: retorna el total de filas afectadas al ejecutar la Instrucción SQL</returns>
+        public int EjecutarSentencia(string sqlSentencia)
+        {
+            try
+            {
+                int filasAfectadas = 0;
+                sqlConexion.Open();
+                sqlComando = new SqlCommand(sqlSentencia, sqlConexion);
+                filasAfectadas = sqlComando.ExecuteNonQuery();
+                sqlConexion.Close();
+                estado = "ok";
+                return filasAfectadas;
+            }
+            catch (Exception ex)
+            {
+                sqlConexion.Close();
+                estado = ex.Message.ToString();
+                return 0;
+            }
+
+        }
+
+
+        /// <summary>
+        /// Ejecuta una instrucción SQL en una conexión y devuelve la primera fila del conjunto de resultados devueltos
+        /// </summary>
+        /// <param name="sqlSentencia">string que representa la instrucción SQL a ejecutar</param>
+        /// <returns>Devuelve la primera fila del conjunto de resultados devueltos</returns>
+        public string ObtenerUnValor(string sqlSentencia)
+        {
+            try
+            {
+
+                string retorno = "";
+                sqlComando = new SqlCommand(sqlSentencia, sqlConexion);
+                sqlConexion.Open();
+                retorno = (sqlComando.ExecuteScalar().ToString());
+                estado = "ok";
+                sqlConexion.Close();
+                return retorno;
+
+            }
+            catch (Exception error)
+            {
+                estado = error.Message.ToString();
+                sqlConexion.Close();
+                return "";
+            }
+
+        }
+        /// <summary>
+        /// Obtiene el estado de la actual conexión 
+        /// </summary>
+        public string Estado
+        {
+            get { return estado; }
+
+        }
+        /// <summary>
+        /// Ejecuta una instrucción SQL y devuelve el conjunto de resultados devueltos
+        /// </summary>
+        /// <param name="sqlConsulta">string que representa la sentencia SQL a ejecutar</param>
+        /// <returns>Devuelve un SqlDataReader que representa los datos de la consulta</returns>
+        public SqlDataReader EjecutarConsulta(string sqlConsulta)
+        {
+            try
+            {
+                if (sqlConexion.State.ToString() == "Open")
+                    sqlConexion.Close();
+                sqlComando = new SqlCommand(sqlConsulta, sqlConexion);
+                sqlConexion.Open();
+                SqlDataReader sqlDr = sqlComando.ExecuteReader();
+                estado = "ok";
+                return sqlDr;
+            }
+            catch (SqlException ex)
+            {
+                estado = ex.Message.ToString();
+                return null;
+            }
+        }
+        /// <summary>
+        /// Ejecuta una instrucción SQL y devuelve el conjunto de resultados en un DataTable
+        /// </summary>
+        /// <param name="sqlConsulta">string que representa la sentencia SQL a Ejecutar</param>
+        /// <returns>Retorna un DataTable con los datos de la consulta</returns>
+        public DataTable EjecutarConsultaDataTable(string sqlConsulta)
+        {
+            try
+            {
+                if (sqlConexion.State.ToString() == "Open")
+                    sqlConexion.Close();
+                sqlComando = new SqlCommand(sqlConsulta, sqlConexion);
+                sqlConexion.Open();
+                SqlDataReader sqlDr = sqlComando.ExecuteReader();
+                DataTable tb = new DataTable();
+                tb.Load(sqlDr);
+                estado = "ok";
+                return tb;
+
+            }
+            catch (SqlException ex)
+            {
+                estado = ex.Message.ToString();
+                return null;
+            }
+        }
+        /// <summary>
+        /// Ejecuta una instrucción SQL y devuelve el conjunto de resultados en un SqlDataAdapter
+        /// </summary>
+        /// <param name="sqlSentencia">string que representa la sentencia SQL a ejecutar</param>
+        /// <returns>Retorna un SqlDataAdapter con los datos de la consulta</returns>
+        /*  public SqlDataAdapter EjecutarConsulta(string sqlSentencia)
+          {
+
+              SqlDataAdapter sqlDa = new SqlDataAdapter(sqlSentencia, sqlConexion);
+              SqlCommandBuilder cB = new SqlCommandBuilder(sqlDa);
+              return sqlDa;
+            
+          }*/
+        /// <summary>
+        /// Abre la conexión de la base de datos
+        /// </summary>
+        public void AbrirConexion()
+        {
+            try
+            {
+                sqlConexion.Open();
+                estado = "Abierto";
+            }
+            catch (Exception ex)
+            {
+                sqlConexion.Close();
+                estado = "Cerrado: " + ex.Message;
+            }
+        }
+        /// <summary>
+        /// Cierra la Conexión a la base de datos
+        /// </summary>
+        public void CerrarConexion()
+        {
+            try
+            {
+                sqlConexion.Close();
+                estado = "cerrado";
+            }
+            catch (Exception ex)
+            {
+                estado = "Cerrado: " + ex.Message;
+            }
+        }
+        /// <summary>
+        /// Ejecuta una lista de instrucciones SQL confirmando toda la transacción o deshaciendo la misma
+        /// </summary>
+        /// <param name="sentencias">Representa una lista de string que contienen las instrucciones SQL a ejecutar en la transacción</param>
+        /// <returns>Retorna un valor booleano que indica si la transacción fue realizada o no con éxito</returns>
+        public bool EjecutarTransacciones(List<string> sentencias)
+        {
+            sqlConexion.Open();
+            SqlTransaction transaction;
+            SqlCommand transacciones = sqlConexion.CreateCommand();
+            // Start a local transaction.
+            transaction = sqlConexion.BeginTransaction("SampleTransaction");
+            transacciones.Connection = sqlConexion;
+            transacciones.Transaction = transaction;
+            try
+            {
+                for (int i = 0; i < sentencias.Count; i++)
+                {
+                    transacciones.CommandText = sentencias[i];
+                    transacciones.ExecuteNonQuery();
+                }
+                transaction.Commit();
+                estado = "ok";
+                sqlConexion.Close();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                estado = "excepcion en commit tipo " + ex.GetType() + ":Error " + ex.Message + "\n";
+
+                // Attempt to roll back the transaction. 
+                try
+                {
+                    transaction.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    estado = estado + " Exception rollback " + ex2.GetType() + "mensaje: " + ex2.Message;
+
+                }
+                sqlConexion.Close();
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// Ejecuta un procedimiento almacenado
+        /// </summary>
+        /// <param name="NombreProcedimiento">string que representa el nombre del procedimiento almacenado</param>
+        /// <param name="ListaParametros">Lista de parámetros que utiliza el procedimiento almacenado</param>
+        /// <returns>Retorna un SqlDataReader con el conjunto de datos devueltos en caso de retornar valores </returns>
+        public int EjecutarProcedimientoAlmacenado(string nombreProcedimiento, List<SqlParameter> listaParametros)
+        {
+            try
+            {
+                AbrirConexion();
+                int retorno = 0;
+                sqlComando = new SqlCommand(nombreProcedimiento, sqlConexion);
+                sqlComando.CommandType = CommandType.StoredProcedure;
+                for (int i = 0; i < listaParametros.Count; i++)
+                    sqlComando.Parameters.Add(listaParametros[i]);
+                retorno = sqlComando.ExecuteNonQuery();
+                CerrarConexion();
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                estado = ex.Message;
+                CerrarConexion();
+                return 0;
+            }
+
+        }
+
+        public SqlDataReader EjecutarProcedimientoAlmacenadoConRetorno(string nombreProcedimiento, List<SqlParameter> listaParametros)
+        {
+            try
+            {
+                AbrirConexion();                
+                sqlComando = new SqlCommand(nombreProcedimiento, sqlConexion);
+                sqlComando.CommandType = CommandType.StoredProcedure;
+                for (int i = 0; i < listaParametros.Count; i++)
+                    sqlComando.Parameters.Add(listaParametros[i]);
+                sDr= sqlComando.ExecuteReader();
+                return sDr;
+            }
+            catch (Exception ex)
+            {
+                estado = ex.Message;
+                return null;
+            }
+
+        }
+    }
+
+}
